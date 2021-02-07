@@ -1,14 +1,13 @@
 const mongoose = require('mongoose');
 const config = require('config');
-const { cyan } = require('colors');
 const db = config.get('mongoURI');
 
 const connectDB = async () => {
     try {
         const conn = await mongoose.connect(db, {
             useNewUrlParser: true,
-            // useCreateIndex: true,
-            // useFindAndModify: false,
+            useCreateIndex: true,
+            useFindAndModify: false, // to remove warning from findUpdateAndModify()
             useUnifiedTopology: true,
         });
 

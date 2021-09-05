@@ -22,10 +22,7 @@ router.get('/me', auth, async (req, res) => {
 			return res.status(400).json({ msg: 'There is no profile for this user' });
 		}
 
-		res.status(200).json({
-			success: true,
-			data: profile
-		});
+		res.status(200).json(profile);
 	} catch (err) {
 		console.error(err.message);
 		res.status(500).send('Server Error');
@@ -39,7 +36,6 @@ router.get('/', async (req, res) => {
 	try {
 		const profiles = await Profile.find().populate('User', ['name', 'avatar']);
 		res.status(200).json({
-			success: true,
 			count: profiles.length,
 			data: profiles
 		});
@@ -62,10 +58,7 @@ router.get('/user/:user_id', async (req, res) => {
 			return res.status(400).json({ msg: 'Profile not found' });
 		}
 
-		res.status(200).json({
-			success: true,
-			data: profile
-		});
+		res.status(200).json(profile);
 	} catch (err) {
 		console.error(err.message);
 		if (err.kind == 'ObjectId') {
@@ -145,11 +138,7 @@ router.post(
 					// set the new option to true to return the document after update was applied.
 				);
 
-				return res.status(200).json({
-					success: true,
-					status: 'Record updated',
-					data: profile
-				});
+				return res.status(200).json(profile);
 			}
 
 			// Create new profile
@@ -157,11 +146,7 @@ router.post(
 
 			await profile.save();
 
-			res.status(201).json({
-				success: true,
-				status: 'Record created',
-				data: profile
-			});
+			return res.status(201).json(profile);
 		} catch (err) {
 			console.error(err.message);
 			return res.status(500).send('Server Error');
@@ -188,15 +173,8 @@ router.put(
 			return res.status(400).json({ errors: errors.array() });
 		}
 
-		const {
-			title,
-			company,
-			location,
-			from,
-			to,
-			current,
-			description
-		} = req.body;
+		const { title, company, location, from, to, current, description } =
+			req.body;
 
 		const newExp = {
 			title,
@@ -276,15 +254,8 @@ router.put(
 			return res.status(400).json({ errors: errors.array() });
 		}
 
-		const {
-			school,
-			degree,
-			fieldOfStudy,
-			from,
-			to,
-			current,
-			description
-		} = req.body;
+		const { school, degree, fieldOfStudy, from, to, current, description } =
+			req.body;
 
 		const newEducation = {
 			school,
@@ -370,9 +341,7 @@ router.delete('/', auth, async (req, res) => {
 router.get('/github/:username', (req, res) => {
 	try {
 		const options = {
-			uri: `https://api.github.com/users/${
-				req.params.username
-			}/repos?per_page=5&sort=created:asc&client_id=${config.get(
+			uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${config.get(
 				'githubClientId'
 			)}&client_secret=${config.get('githubClientSecret')}`,
 			method: 'GET',
@@ -380,14 +349,14 @@ router.get('/github/:username', (req, res) => {
 		};
 
 		/* request(options, (error, response, body) => {
-      if (error) console.error(error);
+			if (error) console.error(error);
 
-      if (response.statusCode !== 200) {
-        return res.status(400).json({ msg: 'No github profile found' });
-      }
+			if (response.statusCode !== 200) {
+				return res.status(400).json({ msg: 'No github profile found' });
+			}
 
-      res.json(JSON.parse(body));
-    }); */
+			res.json(JSON.parse(body));
+		}); */
 
 		axios.get(options.uri).then((response) => {
 			if (response.status !== 200) {

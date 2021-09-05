@@ -21,9 +21,7 @@ router.get('/', auth, async (req, res) => {
 			});
 		}
 
-		res.status(200).json({
-			user
-		});
+		res.status(200).json(user);
 	} catch (err) {
 		console.log(err.message);
 		res.status(500).send('Server Error');
@@ -75,9 +73,7 @@ router.post(
 				{ expiresIn: 360000 },
 				(err, token) => {
 					if (err) throw err;
-					return res.status(200).json({
-						token
-					});
+					return res.status(200).json({ token });
 				}
 			);
 		} catch (err) {

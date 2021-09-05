@@ -52,7 +52,7 @@ img {
 }
 
 .large {
-	font-size: 3rem;
+	font-size: 2.2rem;
 	line-height: 1.2;
 	margin-bottom: 1rem;
 }
@@ -257,8 +257,10 @@ img {
 	display: block;
 	width: 100%;
 	padding: 0.4rem;
-	font-size: 1.2rem;
-	border: 1px solid #ccc;
+	font-size: 1rem;
+	border: 0;
+	border-bottom: 1px solid #ccc;
+	outline: 0;
 }
 
 .form input[type='submit'],
@@ -503,7 +505,7 @@ button {
 
 	/* Text Styles */
 	.x-large {
-		font-size: 3rem;
+		font-size: 2.2rem;
 	}
 
 	.large {

@@ -8,6 +8,7 @@ const auth = require('../../middleware/auth');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
+const Post = require('../../models/Post');
 
 // @desc     Get my profile
 // @route    GET api/profile/me
@@ -321,7 +322,8 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
 // access    Private
 router.delete('/', auth, async (req, res) => {
 	try {
-		// @todo - Delete user's posts
+		// Remoce user's posts
+		await Post.deleteMany({user: req.user.id});
 
 		// Delete profile
 		await Profile.findOneAndDelete({ user: req.user.id });
@@ -338,7 +340,7 @@ router.delete('/', auth, async (req, res) => {
 // @desc     Get user's Github repos
 // @route    GET api/profile/github/:username
 // access    Private
-router.get('/github/:username', (req, res) => {
+router.get('/github/:username', async (req, res) => {
 	try {
 		const options = {
 			uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${config.get(
@@ -358,13 +360,22 @@ router.get('/github/:username', (req, res) => {
 			res.json(JSON.parse(body));
 		}); */
 
-		axios.get(options.uri).then((response) => {
+		// using .then() syntax 
+		// axios.get(options.uri).then((response) => {
+		// 	if (response.status !== 200) {
+		// 		return res.status(400).json({ msg: 'No github profile found' });
+		// 	}
+
+		// 	res.json(response.data);
+		// });
+
+		// using async await
+		const response = await axios.get(options.uri);
 			if (response.status !== 200) {
 				return res.status(400).json({ msg: 'No github profile found' });
 			}
-
 			res.json(response.data);
-		});
+
 	} catch (err) {
 		console.error(err.message);
 		res.status(500).send('Server Error');

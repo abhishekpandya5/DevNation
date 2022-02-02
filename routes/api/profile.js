@@ -194,9 +194,7 @@ router.put(
 
 			profile.save();
 
-			res.status(200).json({
-				profile
-			});
+			res.status(200).json(profile);
 		} catch (err) {
 			console.error(err);
 			res.status(500).send('Server Error');
@@ -225,10 +223,7 @@ router.delete('/experience/:exp_id', auth, async (req, res) => {
 
 		await profile.save();
 
-		res.status(200).json({
-			msg: 'Record updated',
-			profile
-		});
+		res.status(200).json(profile);
 	} catch (err) {
 		console.error(err.message);
 		res.status(500).send('Server Error');
@@ -255,8 +250,7 @@ router.put(
 			return res.status(400).json({ errors: errors.array() });
 		}
 
-		const { school, degree, fieldOfStudy, from, to, current, description } =
-			req.body;
+		const { school, degree, fieldOfStudy, from, to, current, description } = req.body;
 
 		const newEducation = {
 			school,
@@ -275,10 +269,7 @@ router.put(
 
 			profile.save();
 
-			res.status(200).json({
-				success: true,
-				data: profile
-			});
+			res.status(200).json(profile);
 		} catch (err) {
 			console.error(err);
 			res.status(500).send('Server Error');
@@ -307,10 +298,7 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
 
 		await profile.save();
 
-		res.status(200).json({
-			msg: 'Record updated',
-			profile
-		});
+		res.status(200).json(profile);
 	} catch (err) {
 		console.error(err.message);
 		res.status(500).send('Server Error');
@@ -327,6 +315,7 @@ router.delete('/', auth, async (req, res) => {
 
 		// Delete profile
 		await Profile.findOneAndDelete({ user: req.user.id });
+		
 		// Delete user
 		await User.findOneAndDelete({ _id: req.user.id });
 

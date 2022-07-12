@@ -52,13 +52,15 @@ img {
 }
 
 .large {
-	font-size: 2.2rem;
+	/* font-size: 2.2rem; */
+	font-size: 2rem;
 	line-height: 1.2;
 	margin-bottom: 1rem;
 }
 
 .lead {
-	font-size: 1.5rem;
+	/* font-size: 1.5rem; */
+	font-size: 1.2rem;
 	margin-bottom: 1rem;
 }
 
@@ -138,6 +140,7 @@ img {
 	border: none;
 	cursor: pointer;
 	margin-right: 0.5rem;
+	border-radius: 3px;
 	transition: opacity 0.2s ease-in;
 	outline: none;
 }
@@ -240,6 +243,9 @@ img {
 /* Forms */
 .form .form-group {
 	margin: 1.2rem 0;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 5px;
 }
 
 .form .form-text {
@@ -258,8 +264,8 @@ img {
 	width: 100%;
 	padding: 0.4rem;
 	font-size: 1rem;
-	border: 0;
-	border-bottom: 1px solid #ccc;
+	border: none;
+	border-radius: 4px;
 	outline: 0;
 }
 
@@ -357,7 +363,8 @@ button {
 /* Profiles Page */
 .profile {
 	display: grid;
-	grid-template-columns: 2fr 4fr 2fr;
+	/* grid-template-columns: 2fr 4fr 2fr; */
+	grid-template-columns: 1fr 3fr 2fr;
 	align-items: center;
 	grid-gap: 2rem;
 	padding: 1rem;
@@ -365,12 +372,20 @@ button {
 	margin-bottom: 1rem;
 }
 
+.profiles-img {
+	width: 150px;
+}
+
 /* Profile Page */
 .profile-grid {
 	display: grid;
-	grid-template-areas:
+	/* grid-template-areas:
 		'top top'
 		'about about'
+		'exp edu'
+		'github github'; */
+	grid-template-areas:
+		'top about'
 		'exp edu'
 		'github github';
 	grid-gap: 1rem;
@@ -386,7 +401,8 @@ button {
 }
 
 .profile-top img {
-	width: 250px;
+	/* width: 250px; */
+	width: 150px;
 }
 
 .profile-top .icons a {

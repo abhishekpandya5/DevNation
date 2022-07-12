@@ -127,7 +127,7 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
             onChange={(e) => onInputChange(e)}
           />
           <small className='form-text'>
-            City & state suggested (eg. Boston, MA)
+            City & state
 					</small>
         </div>
         <div className='form-group'>

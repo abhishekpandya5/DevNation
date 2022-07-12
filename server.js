@@ -1,6 +1,7 @@
 const express = require('express');
 const colors = require('colors');
 const connectDB = require('./config/db');
+const cors = require('cors');
 
 const app = express();
 
@@ -9,6 +10,7 @@ connectDB();
 
 // Initialize Body Parser middleware for req.body
 app.use(express.json());
+app.use(cors());
 
 app.get('/', (req, res) => {
 	res.send('Api running');

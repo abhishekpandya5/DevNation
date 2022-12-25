@@ -93,8 +93,6 @@ router.delete('/:id', auth, async (req, res) => {
 		await post.remove();
 
 		res.status(200).json({
-			success: true,
-			data: {},
 			msg: 'Post deleted'
 		});
 	} catch (err) {
@@ -125,9 +123,7 @@ router.put('/like/:id', auth, async (req, res) => {
 
 		await post.save();
 
-		res.status(200).json({
-			data: post.likes
-		});
+		res.status(200).json(post.likes);
 	} catch (err) {
 		console.error(err.message);
 		res.status(500).send('Server Error');
@@ -158,9 +154,7 @@ router.put('/unlike/:id', auth, async (req, res) => {
 
 		await post.save();
 
-		res.status(200).json({
-			data: post.likes
-		});
+		res.status(200).json(post.likes);
 	} catch (err) {
 		console.error(err.message);
 		if (err.kind === 'ObjectId') {
@@ -197,9 +191,7 @@ router.post(
 
 			await post.save();
 
-			res.status(200).json({
-				data: post.comments
-			});
+			res.status(200).json(post.comments);
 		} catch (err) {
 			console.error(err.message);
 			res.status(500).send('Server Error');
@@ -238,9 +230,7 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
 
 		await post.save();
 
-		res.status(200).json({
-			data: post.comments
-		});
+		res.status(200).json(post.comments);
 	} catch (err) {
 		console.error(err.message);
 		res.status(500).send('Server Error');

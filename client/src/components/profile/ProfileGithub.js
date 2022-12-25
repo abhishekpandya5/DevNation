@@ -5,6 +5,7 @@ import Spinner from '../layout/Spinner';
 import { getGithubRepos } from '../../actions/profile';
 
 const ProfileGithub = ({ username, getGithubRepos, repos }) => {
+	
 	useEffect(() => {
 		getGithubRepos(username);
 	}, [getGithubRepos, username]);

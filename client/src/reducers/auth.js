@@ -16,6 +16,7 @@ const initialState = {
 	user: null
 };
 
+/* eslint import/no-anonymous-default-export: [2, {"allowAnonymousFunction": true}] */
 export default function (state = initialState, action) {
 	const { type, payload } = action;
 
